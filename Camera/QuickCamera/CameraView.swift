@@ -26,5 +26,9 @@ struct CameraView: UIViewControllerRepresentable {
     public func switchCamera() {
         cameraViewController.switchCamera()
     }
+    
+    public func takePhoto() {
+        cameraViewController.capturePhoto()
+    }
 }
 

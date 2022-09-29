@@ -65,7 +65,7 @@ struct ContentView: View {
                     HStack {
                         Spacer()
                         Button {
-                            print("take photo")
+                            cameraView.takePhoto()
                         } label: {
                             Image(systemName: "record.circle")
                                 .font(.system(size: 44.0))
