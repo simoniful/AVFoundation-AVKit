@@ -35,7 +35,6 @@ import PhotosUI
 import AVKit
 
 struct ContentView: View {
-    
     @State var isSheetPresented = false
     @State var videos = [URL]()
     @State var sheetMode: SheetMode = .picker
@@ -67,7 +66,7 @@ struct ContentView: View {
                         isSheetPresented = true
                     } label: {
                         Image(systemName: "video.badge.plus")
-                            .font(.largeTitle)
+                            .font(.title)
                     }
                 }
                 .padding(.leading)
@@ -81,10 +80,11 @@ struct ContentView: View {
                     sheetMode = .video
                 } label: {
                     Image(systemName: "list.and.film")
-                        .font(.largeTitle)
+                        .font(.title)
                 }
                 .padding(.trailing)
             }
+            .frame(width: UIScreen.main.bounds.width, height: 50.0, alignment: .center)
             .sheet(isPresented: $isSheetPresented) {
                 switch sheetMode {
                 case .picker:

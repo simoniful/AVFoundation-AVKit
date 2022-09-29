@@ -24,6 +24,7 @@ struct AVMoviePlayer: UIViewControllerRepresentable {
         avViewController.delegate = context.coordinator
         avViewController.showsPlaybackControls = true
         avViewController.requiresLinearPlayback = true
+        // avViewController.allowsPictureInPicturePlayback = false
         return avViewController
     }
     
