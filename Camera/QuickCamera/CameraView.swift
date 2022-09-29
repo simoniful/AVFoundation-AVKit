@@ -28,8 +28,16 @@ struct CameraView: UIViewControllerRepresentable {
         cameraViewController.switchCamera()
     }
     
-    public func takePhoto(flashMode: AVCaptureDevice.FlashMode) {
-        cameraViewController.capturePhoto(flashMode: flashMode)
+//    public func takePhoto(flashMode: AVCaptureDevice.FlashMode) {
+//        cameraViewController.capturePhoto(flashMode: flashMode)
+//    }
+    
+    public func startRecording() {
+        cameraViewController.captureMovie()
+    }
+    
+    public func stopRecording() {
+        cameraViewController.stopRecording()
     }
 }
 

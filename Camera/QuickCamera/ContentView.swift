@@ -35,7 +35,8 @@ import AVFoundation
 
 struct ContentView: View {
     
-    @State var flashMode: AVCaptureDevice.FlashMode = .auto
+    // @State var flashMode: AVCaptureDevice.FlashMode = .auto
+    @State var isRecording = false
     var cameraView = CameraView()
     
     var body: some View {
@@ -44,25 +45,25 @@ struct ContentView: View {
                 cameraView
                 VStack {
                     HStack {
-                        Button {
-                            switch flashMode {
-                            case .off:
-                                flashMode = .on
-                            case .on:
-                                flashMode = .auto
-                            case .auto:
-                                flashMode = .off
-                            @unknown default:
-                                flashMode = .auto
-                            }
-                        } label: {
-                            HStack {
-                                Image(systemName: (flashMode == .auto || flashMode == .on) ? "bolt" : "bolt.slash")
-                                    .foregroundColor(.white)
-                                Text(flashMode.description)
-                                    .foregroundColor(.white)
-                            }.padding()
-                        }
+//                        Button {
+//                            switch flashMode {
+//                            case .off:
+//                                flashMode = .on
+//                            case .on:
+//                                flashMode = .auto
+//                            case .auto:
+//                                flashMode = .off
+//                            @unknown default:
+//                                flashMode = .auto
+//                            }
+//                        } label: {
+//                            HStack {
+//                                Image(systemName: (flashMode == .auto || flashMode == .on) ? "bolt" : "bolt.slash")
+//                                    .foregroundColor(.white)
+//                                Text(flashMode.description)
+//                                    .foregroundColor(.white)
+//                            }.padding()
+//                        }
                         Spacer()
                         Button {
                             cameraView.switchCamera()
@@ -76,11 +77,17 @@ struct ContentView: View {
                     HStack {
                         Spacer()
                         Button {
-                            cameraView.takePhoto(flashMode: flashMode)
+//                            cameraView.takePhoto(flashMode: flashMode)
+                            isRecording ?
+                            cameraView.stopRecording() :
+                            cameraView.startRecording()
+                            
+                            isRecording.toggle()
                         } label: {
                             Image(systemName: "record.circle")
                                 .font(.system(size: 44.0))
-                                .foregroundColor(.white)
+                                // .foregroundColor(.white)
+                                .foregroundColor(isRecording ? .red : .white)
                         }
                         Spacer()
                     }
@@ -97,17 +104,17 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
-extension AVCaptureDevice.FlashMode {
-    var description: String {
-        switch self {
-        case .off:
-            return "Off"
-        case .on:
-            return "On"
-        case .auto:
-            return "Auto"
-        @unknown default:
-            return "Unknown"
-        }
-    }
-}
+//extension AVCaptureDevice.FlashMode {
+//    var description: String {
+//        switch self {
+//        case .off:
+//            return "Off"
+//        case .on:
+//            return "On"
+//        case .auto:
+//            return "Auto"
+//        @unknown default:
+//            return "Unknown"
+//        }
+//    }
+//}

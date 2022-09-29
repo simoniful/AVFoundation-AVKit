@@ -14,7 +14,17 @@ class CameraViewController: UIViewController {
     let captureSession = AVCaptureSession()
     var previewLayer: AVCaptureVideoPreviewLayer!
     var activeInput: AVCaptureDeviceInput!
-    let imageOutput = AVCapturePhotoOutput()
+    // let imageOutput = AVCapturePhotoOutput()
+    let movieOutput = AVCaptureMovieFileOutput()
+    
+    var tempURL: URL? {
+        let directory = NSTemporaryDirectory() as NSString
+        if directory != "" {
+            let path = directory.appendingPathComponent("video.mov")
+            return URL(fileURLWithPath: path)
+        }
+        return nil
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,27 +40,28 @@ class CameraViewController: UIViewController {
     
     func setupSession() {
         captureSession.beginConfiguration()
-        guard let camera = AVCaptureDevice.default(for: .video)
-                // ,
-              // let mic = AVCaptureDevice.default(for: .audio)
+        // In case, Taking Picture: mic is not needed
+        guard let camera = AVCaptureDevice.default(for: .video),
+              let mic = AVCaptureDevice.default(for: .audio)
         else { return }
         
         do {
             let videoInput = try AVCaptureDeviceInput(device: camera)
-            // let audioInput = try AVCaptureDeviceInput(device: mic)
-            // for input in [videoInput, audioInput] {
-                if captureSession.canAddInput(videoInput) {
-                    captureSession.addInput(videoInput)
+            let audioInput = try AVCaptureDeviceInput(device: mic)
+            for input in [videoInput, audioInput] {
+                if captureSession.canAddInput(input) {
+                    captureSession.addInput(input)
                 }
-            // }
-            if captureSession.canAddOutput(imageOutput) {
-                captureSession.addOutput(imageOutput)
             }
+//            if captureSession.canAddOutput(imageOutput) {
+//                captureSession.addOutput(imageOutput)
+//            }
             activeInput = videoInput
         } catch {
             print("Error setting device input: \(error)")
             return
         }
+        captureSession.addOutput(movieOutput)
         captureSession.commitConfiguration()
     }
     
@@ -106,42 +117,94 @@ class CameraViewController: UIViewController {
         captureSession.commitConfiguration()
     }
     
-    public func capturePhoto(flashMode: AVCaptureDevice.FlashMode) {
-        let settings = AVCapturePhotoSettings()
-        settings.isAutoRedEyeReductionEnabled = true
+//    public func capturePhoto(flashMode: AVCaptureDevice.FlashMode) {
+//        let settings = AVCapturePhotoSettings()
+//        settings.isAutoRedEyeReductionEnabled = true
+//
+//        let device = activeInput.device
+//        if device.hasFlash {
+//            if imageOutput.supportedFlashModes.contains(flashMode) {
+//                settings.flashMode = flashMode
+//            }
+//        }
+//        imageOutput.capturePhoto(with: settings, delegate: self)
+//    }
+    
+    public func captureMovie() {
+        guard let connection = movieOutput.connection(with: .video) else {
+            return
+        }
+        if connection.isVideoStabilizationSupported {
+            connection.preferredVideoStabilizationMode = .auto
+        }
         
         let device = activeInput.device
-        if device.hasFlash {
-            if imageOutput.supportedFlashModes.contains(flashMode) {
-                settings.flashMode = flashMode
+        if device.isSmoothAutoFocusEnabled {
+            do {
+                try device.lockForConfiguration()
+                device.isSmoothAutoFocusEnabled = true
+                device.unlockForConfiguration()
+            } catch {
+                print("Error: \(error.localizedDescription)")
             }
         }
-        imageOutput.capturePhoto(with: settings, delegate: self)
+        guard let outURL = tempURL else { return }
+        movieOutput.startRecording(to: outURL, recordingDelegate: self)
+    }
+    
+    public func stopRecording() {
+        if movieOutput.isRecording {
+            movieOutput.stopRecording()
+        }
     }
 }
 
-extension CameraViewController: AVCapturePhotoCaptureDelegate {
-    func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
+//extension CameraViewController: AVCapturePhotoCaptureDelegate {
+//    func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
+//        if let error = error {
+//            print("Error: \(error.localizedDescription)")
+//            return
+//        }
+//
+//        guard let photoData = photo.fileDataRepresentation() else {
+//            return
+//        }
+//
+//        PHPhotoLibrary.requestAuthorization(for: .addOnly) { status in
+//            if status == .authorized {
+//                PHPhotoLibrary.shared().performChanges {
+//                    let request = PHAssetCreationRequest.forAsset()
+//                    request.addResource(
+//                        with: .photo,
+//                        data: photoData,
+//                        options: nil
+//                    )
+//                } completionHandler: { success, error in
+//
+//                }
+//            }
+//        }
+//    }
+//}
+
+extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
+    func fileOutput(
+        _ output: AVCaptureFileOutput,
+        didFinishRecordingTo outputFileURL: URL,
+        from connections: [AVCaptureConnection],
+        error: Error?
+    ) {
         if let error = error {
             print("Error: \(error.localizedDescription)")
             return
-        }
-        
-        guard let photoData = photo.fileDataRepresentation() else {
-            return
-        }
-        
-        PHPhotoLibrary.requestAuthorization(for: .addOnly) { status in
-            if status == .authorized {
-                PHPhotoLibrary.shared().performChanges {
-                    let request = PHAssetCreationRequest.forAsset()
-                    request.addResource(
-                        with: .photo,
-                        data: photoData,
-                        options: nil
-                    )
-                } completionHandler: { success, error in
-                    
+        } else {
+            PHPhotoLibrary.requestAuthorization { status in
+                if status == .authorized {
+                    PHPhotoLibrary.shared().performChanges {
+                        PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: outputFileURL)
+                    } completionHandler: { success, error in
+                        
+                    }
                 }
             }
         }
