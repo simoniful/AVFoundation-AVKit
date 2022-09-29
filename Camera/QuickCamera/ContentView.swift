@@ -31,9 +31,11 @@
 /// THE SOFTWARE.
 
 import SwiftUI
+import AVFoundation
 
 struct ContentView: View {
     
+    @State var flashMode: AVCaptureDevice.FlashMode = .auto
     var cameraView = CameraView()
     
     var body: some View {
@@ -43,12 +45,21 @@ struct ContentView: View {
                 VStack {
                     HStack {
                         Button {
-                            print("flash pressed")
+                            switch flashMode {
+                            case .off:
+                                flashMode = .on
+                            case .on:
+                                flashMode = .auto
+                            case .auto:
+                                flashMode = .off
+                            @unknown default:
+                                flashMode = .auto
+                            }
                         } label: {
                             HStack {
-                                Image(systemName: "bolt")
+                                Image(systemName: (flashMode == .auto || flashMode == .on) ? "bolt" : "bolt.slash")
                                     .foregroundColor(.white)
-                                Text("On")
+                                Text(flashMode.description)
                                     .foregroundColor(.white)
                             }.padding()
                         }
@@ -65,7 +76,7 @@ struct ContentView: View {
                     HStack {
                         Spacer()
                         Button {
-                            cameraView.takePhoto()
+                            cameraView.takePhoto(flashMode: flashMode)
                         } label: {
                             Image(systemName: "record.circle")
                                 .font(.system(size: 44.0))
@@ -83,5 +94,20 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+    }
+}
+
+extension AVCaptureDevice.FlashMode {
+    var description: String {
+        switch self {
+        case .off:
+            return "Off"
+        case .on:
+            return "On"
+        case .auto:
+            return "Auto"
+        @unknown default:
+            return "Unknown"
+        }
     }
 }

@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import AVFoundation
 
 struct CameraView: UIViewControllerRepresentable {
     typealias UIViewControllerType = CameraViewController
@@ -27,8 +28,8 @@ struct CameraView: UIViewControllerRepresentable {
         cameraViewController.switchCamera()
     }
     
-    public func takePhoto() {
-        cameraViewController.capturePhoto()
+    public func takePhoto(flashMode: AVCaptureDevice.FlashMode) {
+        cameraViewController.capturePhoto(flashMode: flashMode)
     }
 }
 

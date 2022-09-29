@@ -106,9 +106,16 @@ class CameraViewController: UIViewController {
         captureSession.commitConfiguration()
     }
     
-    public func capturePhoto() {
+    public func capturePhoto(flashMode: AVCaptureDevice.FlashMode) {
         let settings = AVCapturePhotoSettings()
         settings.isAutoRedEyeReductionEnabled = true
+        
+        let device = activeInput.device
+        if device.hasFlash {
+            if imageOutput.supportedFlashModes.contains(flashMode) {
+                settings.flashMode = flashMode
+            }
+        }
         imageOutput.capturePhoto(with: settings, delegate: self)
     }
 }
