@@ -64,6 +64,7 @@ struct ContentView: View {
                 HStack {
                     Button {
                         isSheetPresented = true
+                        sheetMode = .picker
                     } label: {
                         Image(systemName: "video.badge.plus")
                             .font(.title)
