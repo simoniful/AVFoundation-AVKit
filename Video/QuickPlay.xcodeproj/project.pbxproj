@@ -13,6 +13,7 @@
 		D3F2932125C076BF00889762 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3F2932025C076BF00889762 /* Preview Assets.xcassets */; };
 		F4507E9728E183C600024A18 /* Thumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4507E9628E183C600024A18 /* Thumbnail.swift */; };
 		F4507E9928E1976300024A18 /* PhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4507E9828E1976300024A18 /* PhotoPicker.swift */; };
+		F4507E9B28E540F700024A18 /* AVMoviePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4507E9A28E540F700024A18 /* AVMoviePlayer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		D3F2932225C076BF00889762 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F4507E9628E183C600024A18 /* Thumbnail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Thumbnail.swift; sourceTree = "<group>"; };
 		F4507E9828E1976300024A18 /* PhotoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPicker.swift; sourceTree = "<group>"; };
+		F4507E9A28E540F700024A18 /* AVMoviePlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVMoviePlayer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				D3F2931925C076BE00889762 /* QuickPlayApp.swift */,
 				F4507E9828E1976300024A18 /* PhotoPicker.swift */,
 				D3F2931B25C076BE00889762 /* ContentView.swift */,
+				F4507E9A28E540F700024A18 /* AVMoviePlayer.swift */,
 				F4507E9628E183C600024A18 /* Thumbnail.swift */,
 				D3F2931D25C076BF00889762 /* Assets.xcassets */,
 				D3F2932225C076BF00889762 /* Info.plist */,
@@ -145,6 +148,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3F2931C25C076BE00889762 /* ContentView.swift in Sources */,
+				F4507E9B28E540F700024A18 /* AVMoviePlayer.swift in Sources */,
 				F4507E9928E1976300024A18 /* PhotoPicker.swift in Sources */,
 				D3F2931A25C076BE00889762 /* QuickPlayApp.swift in Sources */,
 				F4507E9728E183C600024A18 /* Thumbnail.swift in Sources */,

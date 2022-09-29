@@ -72,13 +72,25 @@ struct ContentView: View {
                 }
                 .padding(.leading)
                 Spacer()
+                Button {
+                    let playerItems = videos.map { url in
+                        AVPlayerItem(url: url)
+                    }
+                    player = AVQueuePlayer(items: playerItems)
+                    isSheetPresented = true
+                    sheetMode = .video
+                } label: {
+                    Image(systemName: "list.and.film")
+                        .font(.largeTitle)
+                }
+                .padding(.trailing)
             }
             .sheet(isPresented: $isSheetPresented) {
                 switch sheetMode {
                 case .picker:
                     PhotoPicker(isPresented: $isSheetPresented, videos: $videos)
                 case .video:
-                    VideoPlayer(player: player)
+                    AVMoviePlayer(player: player!)
                 }
             }
         }
