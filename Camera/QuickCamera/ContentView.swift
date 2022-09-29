@@ -33,48 +33,51 @@
 import SwiftUI
 
 struct ContentView: View {
-  var body: some View {
-    VStack {
-      ZStack {
-        EmptyView()
-          .foregroundColor(.black)
+    
+    var cameraView = CameraView()
+    
+    var body: some View {
         VStack {
-          HStack {
-            Button {
-              print("flash pressed")
-            } label: {
-              HStack {
-                Image(systemName: "bolt")
-                  .foregroundColor(.white)
-                Text("On")
-                  .foregroundColor(.white)
-              }.padding()
+            ZStack {
+                cameraView
+                VStack {
+                    HStack {
+                        Button {
+                            print("flash pressed")
+                        } label: {
+                            HStack {
+                                Image(systemName: "bolt")
+                                    .foregroundColor(.white)
+                                Text("On")
+                                    .foregroundColor(.white)
+                            }.padding()
+                        }
+                        Spacer()
+                        Button {
+                            cameraView.switchCamera()
+                        } label: {
+                            Image(systemName: "arrow.triangle.2.circlepath.camera")
+                                .padding()
+                                .foregroundColor(.white)
+                        }
+                    }
+                    Spacer()
+                    HStack {
+                        Spacer()
+                        Button {
+                            print("take photo")
+                        } label: {
+                            Image(systemName: "record.circle")
+                                .font(.system(size: 44.0))
+                                .foregroundColor(.white)
+                        }
+                        Spacer()
+                    }
+                    .padding(.vertical)
+                }
             }
-            Spacer()
-            Button {
-              print("change camera")
-            } label: {
-              Image(systemName: "arrow.triangle.2.circlepath.camera")
-                .padding()
-                .foregroundColor(.white)
-            }
-          }
-          Spacer()
-          HStack {
-            Spacer()
-            Button {
-              print("take photo")
-            } label: {
-              Image(systemName: "record.circle")
-                .font(.system(size: 60))
-                .foregroundColor(.white)
-            }
-            Spacer()
-          }
         }
-      }
     }
-  }
 }
 
 struct ContentView_Previews: PreviewProvider {

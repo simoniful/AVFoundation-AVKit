@@ -11,6 +11,8 @@
 		D339619625CE17E500A5B699 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D339619525CE17E500A5B699 /* ContentView.swift */; };
 		D339619825CE17E800A5B699 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D339619725CE17E800A5B699 /* Assets.xcassets */; };
 		D339619B25CE17E800A5B699 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D339619A25CE17E800A5B699 /* Preview Assets.xcassets */; };
+		F4507E9D28E5549E00024A18 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4507E9C28E5549E00024A18 /* CameraViewController.swift */; };
+		F4507E9F28E55BAC00024A18 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4507E9E28E55BAC00024A18 /* CameraView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +22,8 @@
 		D339619725CE17E800A5B699 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D339619A25CE17E800A5B699 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D339619C25CE17E800A5B699 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F4507E9C28E5549E00024A18 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		F4507E9E28E55BAC00024A18 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +58,8 @@
 			children = (
 				D339619325CE17E500A5B699 /* QuickCameraApp.swift */,
 				D339619525CE17E500A5B699 /* ContentView.swift */,
+				F4507E9C28E5549E00024A18 /* CameraViewController.swift */,
+				F4507E9E28E55BAC00024A18 /* CameraView.swift */,
 				D339619725CE17E800A5B699 /* Assets.xcassets */,
 				D339619C25CE17E800A5B699 /* Info.plist */,
 				D339619925CE17E800A5B699 /* Preview Content */,
@@ -140,6 +146,8 @@
 			files = (
 				D339619625CE17E500A5B699 /* ContentView.swift in Sources */,
 				D339619425CE17E500A5B699 /* QuickCameraApp.swift in Sources */,
+				F4507E9D28E5549E00024A18 /* CameraViewController.swift in Sources */,
+				F4507E9F28E55BAC00024A18 /* CameraView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
