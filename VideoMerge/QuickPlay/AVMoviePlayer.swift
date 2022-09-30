@@ -35,43 +35,47 @@ import SwiftUI
 import AVKit
 
 struct AVMoviePlayer: UIViewControllerRepresentable {
-
-  typealias UIViewControllerType = AVPlayerViewController
-
-  var player: AVPlayer
-
-
-  init(url: URL) {
-    player = AVPlayer(url: url)
-  }
-
-  init(urls: [URL]) {
-    var items = [AVPlayerItem]()
-    for url in urls {
-      items.append(AVPlayerItem(url: url))
+    
+    typealias UIViewControllerType = AVPlayerViewController
+    
+    var player: AVPlayer
+    
+    
+    init(url: URL) {
+        player = AVPlayer(url: url)
     }
-    player = AVQueuePlayer(items: items)
-  }
-
-  func makeUIViewController(context: Context) -> AVPlayerViewController {
-    let avViewController = AVPlayerViewController()
-    avViewController.player = player
-    avViewController.delegate = context.coordinator
-    avViewController.showsPlaybackControls = true
-    avViewController.requiresLinearPlayback = true
-    return avViewController
-  }
-
-  func updateUIViewController(_ uiViewController: AVPlayerViewController, context: Context) {
-
-  }
-
-  func makeCoordinator() -> AVPlayerCoordinater {
-    AVPlayerCoordinater()
-  }
-
-  class AVPlayerCoordinater: NSObject, AVPlayerViewControllerDelegate {
-
-  }
-
+    
+    init(urls: [URL]) {
+        var items = [AVPlayerItem]()
+        for url in urls {
+            items.append(AVPlayerItem(url: url))
+        }
+        player = AVQueuePlayer(items: items)
+    }
+    
+    init(playerItem: AVPlayerItem) {
+        player = AVPlayer(playerItem: playerItem)
+    }
+    
+    func makeUIViewController(context: Context) -> AVPlayerViewController {
+        let avViewController = AVPlayerViewController()
+        avViewController.player = player
+        avViewController.delegate = context.coordinator
+        avViewController.showsPlaybackControls = true
+        avViewController.requiresLinearPlayback = true
+        return avViewController
+    }
+    
+    func updateUIViewController(_ uiViewController: AVPlayerViewController, context: Context) {
+        
+    }
+    
+    func makeCoordinator() -> AVPlayerCoordinater {
+        AVPlayerCoordinater()
+    }
+    
+    class AVPlayerCoordinater: NSObject, AVPlayerViewControllerDelegate {
+        
+    }
+    
 }

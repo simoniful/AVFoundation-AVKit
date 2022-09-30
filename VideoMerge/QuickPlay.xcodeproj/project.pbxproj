@@ -14,6 +14,7 @@
 		D3F2931C25C076BE00889762 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F2931B25C076BE00889762 /* ContentView.swift */; };
 		D3F2931E25C076BF00889762 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3F2931D25C076BF00889762 /* Assets.xcassets */; };
 		D3F2932125C076BF00889762 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3F2932025C076BF00889762 /* Preview Assets.xcassets */; };
+		F4507EA128E59CF300024A18 /* MergeExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4507EA028E59CF300024A18 /* MergeExport.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		D3F2931D25C076BF00889762 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D3F2932025C076BF00889762 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D3F2932225C076BF00889762 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F4507EA028E59CF300024A18 /* MergeExport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MergeExport.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,12 +62,13 @@
 			children = (
 				D3F2931925C076BE00889762 /* QuickPlayApp.swift */,
 				D3F2931B25C076BE00889762 /* ContentView.swift */,
+				D3944BD325D461DB00F2742F /* Thumbnail.swift */,
 				D3AF66BC25D34826000D675B /* PhotoPicker.swift */,
+				D3944BD625D4674F00F2742F /* AVMoviePlayer.swift */,
+				F4507EA028E59CF300024A18 /* MergeExport.swift */,
 				D3F2931D25C076BF00889762 /* Assets.xcassets */,
 				D3F2932225C076BF00889762 /* Info.plist */,
 				D3F2931F25C076BF00889762 /* Preview Content */,
-				D3944BD325D461DB00F2742F /* Thumbnail.swift */,
-				D3944BD625D4674F00F2742F /* AVMoviePlayer.swift */,
 			);
 			path = QuickPlay;
 			sourceTree = "<group>";
@@ -151,6 +154,7 @@
 				D3944BD725D4674F00F2742F /* AVMoviePlayer.swift in Sources */,
 				D3F2931A25C076BE00889762 /* QuickPlayApp.swift in Sources */,
 				D3944BD425D461DB00F2742F /* Thumbnail.swift in Sources */,
+				F4507EA128E59CF300024A18 /* MergeExport.swift in Sources */,
 				D3AF66BD25D34826000D675B /* PhotoPicker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

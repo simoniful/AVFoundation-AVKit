@@ -35,74 +35,94 @@ import PhotosUI
 import AVKit
 
 struct ContentView: View {
-
-  @State var isSheetPresented = false
-  @State var videos = [URL]()
-  @State var sheetMode: SheetMode = .picker
-  @State var selectedVideo = -1
-
-  enum SheetMode {
-    case picker
-    case video
-    case merge
-  }
-
-  var body: some View {
-    VStack {
-      List {
-        ForEach(0 ..< videos.count, id: \.self) { index in
-          HStack {
-            Thumbnail(url: videos[index])
-            Text("Video Clip \(index + 1)")
-          }
-          .onTapGesture {
-            isSheetPresented = true
-            sheetMode = .video
-            selectedVideo = index
-          }
-        }
-      }
-      HStack {
-        HStack {
-          Button {
-            isSheetPresented = true
-            sheetMode = .picker
-          } label: {
-            Image(systemName: "video.badge.plus")
-              .font(.largeTitle)
-          }
-        }
-        .padding(.leading)
-        Spacer()
-        Button {
-          isSheetPresented = true
-          sheetMode = .merge
-        } label: {
-          Image(systemName: "list.and.film")
-            .font(.largeTitle)
-        }
-        .disabled(videos.count == 0)
-        .padding(.trailing)
-        Spacer()
-        Button {
-
-        } label: {
-          Image(systemName: "film")
-            .font(.largeTitle)
-        }
-        .disabled(videos.count == 0)
-        .padding(.trailing)
-      }
-      .sheet(isPresented: $isSheetPresented) {
-        switch(sheetMode) {
-        case .picker:
-          PhotoPicker(isPresented: $isSheetPresented, videos: $videos)
-        case .video:
-          AVMoviePlayer(url: videos[selectedVideo])
-        case .merge:
-          AVMoviePlayer(urls: videos)
-        }
-      }
+    
+    @State var isSheetPresented = false
+    @State var videos = [URL]()
+    @State var sheetMode: SheetMode = .picker
+    @State var selectedVideo = -1
+    
+    @ObservedObject var merger = MergeExport()
+    
+    enum SheetMode {
+        case picker
+        case video
+        case merge
+        case preview
     }
-  }
+    
+    var body: some View {
+        VStack {
+            List {
+                ForEach(0 ..< videos.count, id: \.self) { index in
+                    HStack {
+                        Thumbnail(url: videos[index])
+                        Text("Video Clip \(index + 1)")
+                    }
+                    .onTapGesture {
+                        isSheetPresented = true
+                        sheetMode = .video
+                        selectedVideo = index
+                    }
+                }
+                if let exportURL = merger.exportURL {
+                    HStack {
+                        Thumbnail(url: exportURL)
+                        Text("Merged Export")
+                    }
+                    .onTapGesture {
+                        selectedVideo = -1
+                        isSheetPresented = true
+                        sheetMode = .video
+                    }
+                }
+            }
+            HStack {
+                HStack {
+                    Button {
+                        isSheetPresented = true
+                        sheetMode = .picker
+                    } label: {
+                        Image(systemName: "video.badge.plus")
+                            .font(.largeTitle)
+                    }
+                }
+                .padding(.leading)
+                Spacer()
+                Button {
+                    merger.videoURLs = videos
+                    isSheetPresented = true
+                    sheetMode = .preview
+                } label: {
+                    Image(systemName: "list.and.film")
+                        .font(.largeTitle)
+                }
+                .disabled(videos.count == 0)
+                .padding(.trailing)
+                Spacer()
+                Button {
+                    merger.videoURLs = videos
+                    merger.mergeAndExportVideo()
+                } label: {
+                    Image(systemName: "film")
+                        .font(.largeTitle)
+                }
+                .disabled(videos.count == 0)
+                .padding(.trailing)
+            }
+            .sheet(isPresented: $isSheetPresented) {
+                switch(sheetMode) {
+                case .picker:
+                    PhotoPicker(isPresented: $isSheetPresented, videos: $videos)
+                case .video:
+                    AVMoviePlayer(
+                        url: (selectedVideo == -1) ? merger.exportURL! : videos[selectedVideo]
+                    )
+                case .merge:
+                    AVMoviePlayer(urls: videos)
+                case .preview:
+                    AVMoviePlayer(playerItem: merger.previewMerge())
+                }
+            }
+        }
+    }
 }
