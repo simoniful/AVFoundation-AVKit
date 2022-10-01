@@ -37,6 +37,7 @@ struct VideoFeedView: View {
   @State private var selectedVideo: Video?
   
   private let videos = Video.fetchLocalVideos() + Video.fetchRemoteVideos()
+  private let videoClips = VideoClip.urls
 
   var body: some View {
     NavigationView {
@@ -63,7 +64,7 @@ struct VideoFeedView: View {
     HStack {
       Spacer()
 
-      Rectangle()
+      LoopingPlayerView(videoURLs: videoClips)
         .background(Color.black)
         .frame(width: 250, height: 140)
         .cornerRadius(8)
