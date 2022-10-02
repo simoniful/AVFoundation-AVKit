@@ -57,7 +57,7 @@ struct VideoFeedView: View {
       .navigationTitle("Travel Vlogs")
     }
     .fullScreenCover(item: $selectedVideo) {
-      // On Dismiss Closure
+      embeddedVideoRate = 1.0
     } content: { item in
       makeFullScreenVideoPlayer(for: item)
     }
@@ -97,6 +97,7 @@ struct VideoFeedView: View {
       VideoPlayer(player: avPlayer)
         .edgesIgnoringSafeArea(.all)
         .onAppear {
+          embeddedVideoRate = 0.0
           avPlayer.play()
         }
     } else {

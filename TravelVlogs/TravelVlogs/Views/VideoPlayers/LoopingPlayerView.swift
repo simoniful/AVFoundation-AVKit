@@ -82,6 +82,12 @@ final class LoopingPlayerUIView: UIView {
   func setRate(_ value: Float) {
     player?.rate = value
   }
+  
+  func cleanup() {
+    player?.pause()
+    player?.removeAllItems()
+    player = nil
+  }
 }
 
 struct LoopingPlayerView: UIViewRepresentable {
@@ -102,5 +108,9 @@ struct LoopingPlayerView: UIViewRepresentable {
   func updateUIView(_ uiView: LoopingPlayerUIView, context: Context) {
     uiView.setVolume(volume)
     uiView.setRate(rate)
+  }
+  
+  static func dismantleUIView(_ uiView: LoopingPlayerUIView, coordinator: ()) {
+    uiView.cleanup()
   }
 }
