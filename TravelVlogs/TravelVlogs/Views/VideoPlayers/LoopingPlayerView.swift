@@ -90,7 +90,6 @@ struct LoopingPlayerView: UIViewRepresentable {
   @Binding var rate: Float
   @Binding var volume: Float
 
-  
   func makeUIView(context: Context) -> LoopingPlayerUIView {
     let view = LoopingPlayerUIView(urls: videoURLs)
     

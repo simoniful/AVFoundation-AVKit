@@ -92,16 +92,11 @@ struct VideoFeedView: View {
   
   @ViewBuilder
   private func makeFullScreenVideoPlayer(for video: Video) -> some View {
-    // 1
     if let url = video.videoURL {
-      // 2
       let avPlayer = AVPlayer(url: url)
-      // 3
       VideoPlayer(player: avPlayer)
-        // 4
         .edgesIgnoringSafeArea(.all)
         .onAppear {
-          // 5
           avPlayer.play()
         }
     } else {
