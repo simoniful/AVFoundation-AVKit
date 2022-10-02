@@ -31,12 +31,24 @@
 /// THE SOFTWARE.
 
 import SwiftUI
+import AVFoundation
 
 @main
 struct AppMain: App {
+  init() {
+    setMixWithOthersPlaybackCategory()
+  }
+
   var body: some Scene {
     WindowGroup {
       VideoFeedView()
     }
+  }
+  
+  private func setMixWithOthersPlaybackCategory() {
+    try? AVAudioSession.sharedInstance().setCategory(
+      AVAudioSession.Category.ambient,
+      mode: AVAudioSession.Mode.moviePlayback,
+      options: [.mixWithOthers])
   }
 }
