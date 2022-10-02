@@ -29,6 +29,7 @@
 		30980A36262CFCA2002B6DB1 /* bulletTrain.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 30980A28262CFCA2002B6DB1 /* bulletTrain.mp4 */; };
 		30980A37262CFCA2002B6DB1 /* shark.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 30980A29262CFCA2002B6DB1 /* shark.mp4 */; };
 		30980A40262D0939002B6DB1 /* VideoRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30980A3F262D0939002B6DB1 /* VideoRow.swift */; };
+		F4507EA328E9D76300024A18 /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4507EA228E9D76300024A18 /* VideoPlayerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		30980A28262CFCA2002B6DB1 /* bulletTrain.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = bulletTrain.mp4; sourceTree = "<group>"; };
 		30980A29262CFCA2002B6DB1 /* shark.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = shark.mp4; sourceTree = "<group>"; };
 		30980A3F262D0939002B6DB1 /* VideoRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoRow.swift; sourceTree = "<group>"; };
+		F4507EA228E9D76300024A18 /* VideoPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				302DE07D263DCDB600200D25 /* LoopingPlayerView.swift */,
+				F4507EA228E9D76300024A18 /* VideoPlayerView.swift */,
 			);
 			path = VideoPlayers;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 				302DE07E263DCDB600200D25 /* LoopingPlayerView.swift in Sources */,
 				30980A40262D0939002B6DB1 /* VideoRow.swift in Sources */,
 				18D775C522AD944300AE281E /* VideoFeedView.swift in Sources */,
+				F4507EA328E9D76300024A18 /* VideoPlayerView.swift in Sources */,
 				30980A1C262CF372002B6DB1 /* Video.swift in Sources */,
 				1839F4B025190F2A00BB00F1 /* AppMain.swift in Sources */,
 				3052FF82262DCFB700F01491 /* Utils.swift in Sources */,

@@ -94,7 +94,8 @@ struct VideoFeedView: View {
   private func makeFullScreenVideoPlayer(for video: Video) -> some View {
     if let url = video.videoURL {
       let avPlayer = AVPlayer(url: url)
-      VideoPlayer(player: avPlayer)
+//      VideoPlayer(player: avPlayer)
+      VideoPlayerView(player: avPlayer)
         .edgesIgnoringSafeArea(.all)
         .onAppear {
           embeddedVideoRate = 0.0

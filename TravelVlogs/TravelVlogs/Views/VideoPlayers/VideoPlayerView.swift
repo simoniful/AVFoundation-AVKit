@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -31,28 +31,18 @@
 /// THE SOFTWARE.
 
 import SwiftUI
-import AVFoundation
+import AVKit
 
-@main
-struct AppMain: App {
-  init() {
-    setVideoPlaybackCategory()
+struct VideoPlayerView: UIViewControllerRepresentable {
+  let player: AVPlayer?
+
+  func updateUIViewController(_ uiViewController: AVPlayerViewController, context: Context) {
+    uiViewController.player = player
   }
 
-  var body: some Scene {
-    WindowGroup {
-      VideoFeedView()
-    }
-  }
-  
-  private func setMixWithOthersPlaybackCategory() {
-    try? AVAudioSession.sharedInstance().setCategory(
-      AVAudioSession.Category.ambient,
-      mode: AVAudioSession.Mode.moviePlayback,
-      options: [.mixWithOthers])
-  }
-  
-  private func setVideoPlaybackCategory() {
-    try? AVAudioSession.sharedInstance().setCategory(.playback)
+  func makeUIViewController(context: Context) -> AVPlayerViewController {
+    let controller = AVPlayerViewController()
+    controller.player = player
+    return controller
   }
 }
